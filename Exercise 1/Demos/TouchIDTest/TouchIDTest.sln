@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchIDTest", "TouchIDTest\TouchIDTest.csproj", "{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Debug|iPhone.Build.0 = Debug|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Release|iPhone.ActiveCfg = Release|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Release|iPhone.Build.0 = Release|iPhone
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{03CAF6B8-A2B9-4C4B-93F0-B796B3851EB8}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Debug|iPhone.Build.0 = Debug|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Release|iPhone.ActiveCfg = Release|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Release|iPhone.Build.0 = Release|iPhone
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{DF88FC5C-8D7C-4AA9-AC54-193A079F9A5A}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PhotoDisplay\PhotoDisplay.csproj
+	EndGlobalSection
+EndGlobal

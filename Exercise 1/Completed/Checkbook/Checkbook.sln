@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkbook", "Checkbook\Checkbook.csproj", "{F5F2FA2C-456A-429A-94CB-5D91E553063D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Debug|iPhone.Build.0 = Debug|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Release|iPhone.ActiveCfg = Release|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Release|iPhone.Build.0 = Release|iPhone
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{F5F2FA2C-456A-429A-94CB-5D91E553063D}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Checkbook\Checkbook.csproj
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="xe0-GY-70h" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+    </dependencies>
+    <scenes>
+        <!--Checkbook-->
+        <scene sceneID="5">
+            <objects>
+                <tableViewController id="6" title="Checks" customClass="CheckbookViewController" clearsSelectionOnViewWillAppear="NO" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CheckCell" rowHeight="80" id="10" customClass="CheckViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="10" id="11">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Payee" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                                            <rect key="frame" x="10" y="39" width="257.5" height="20.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" red="0.19019009919999999" green="0.61040327719999998" blue="0.88863201530000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="29">
+                                            <rect key="frame" x="257.5" y="39" width="52.5" height="20.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Friday, February 15" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="iex-P2-8w7">
+                                            <rect key="frame" x="10" y="10" width="300" height="18"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="iex-P2-8w7" firstAttribute="top" secondItem="11" secondAttribute="top" constant="10" id="33"/>
+                                        <constraint firstItem="21" firstAttribute="trailing" secondItem="29" secondAttribute="leading" constant="10" id="35"/>
+                                        <constraint firstAttribute="bottom" secondItem="21" secondAttribute="bottom" constant="20" id="73"/>
+                                        <constraint firstAttribute="trailing" secondItem="29" secondAttribute="trailing" constant="10" id="G0m-aN-G9o"/>
+                                        <constraint firstItem="29" firstAttribute="baseline" secondItem="21" secondAttribute="baseline" id="K7o-hW-gSA"/>
+                                        <constraint firstAttribute="trailing" secondItem="iex-P2-8w7" secondAttribute="trailing" constant="10" id="OaA-EY-F60"/>
+                                        <constraint firstItem="21" firstAttribute="leading" secondItem="11" secondAttribute="leading" constant="10" id="abK-nh-bW8"/>
+                                        <constraint firstItem="iex-P2-8w7" firstAttribute="leading" secondItem="11" secondAttribute="leading" constant="10" id="zaS-gT-CLQ"/>
+                                        <constraint firstItem="21" firstAttribute="top" secondItem="iex-P2-8w7" secondAttribute="bottom" constant="11" id="132"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="Amount" destination="29" id="name-outlet-29"/>
+                                    <outlet property="DateLabel" destination="iex-P2-8w7" id="name-outlet-iex-P2-8w7"/>
+                                    <outlet property="PayeeText" destination="21" id="name-outlet-21"/>
+                                    <segue destination="fk4-Jp-7ju" kind="showDetail" id="108" identifier="showDetails"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6" id="8"/>
+                            <outlet property="delegate" destination="6" id="9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Checks" id="67"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1880" y="-44"/>
+        </scene>
+        <!--Check Details View Controller-->
+        <scene sceneID="02T-y3-DyD">
+            <objects>
+                <viewController id="v8t-aj-f2R" customClass="CheckDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Ck-VO-l3j"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iia-UP-qdu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4dY-Cd-uz3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="f55-zl-frm" title="Details"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j10-jI-Geu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2234" y="883"/>
+        </scene>
+        <!--Master Navigation Controller-->
+        <scene sceneID="uPn-mC-iLw">
+            <objects>
+                <navigationController id="ABi-Im-JKK" title="Checks" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" clipsSubviews="YES" multipleTouchEnabled="YES" id="Ckp-RZ-lyC">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6" kind="relationship" relationship="rootViewController" id="80"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ybX-8B-bUW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="-44"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VJv-kj-JcG">
+            <objects>
+                <navigationController id="fk4-Jp-7ju" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" clipsSubviews="YES" multipleTouchEnabled="YES" id="8VB-Kl-CeL">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="v8t-aj-f2R" kind="relationship" relationship="rootViewController" id="eHx-qw-gl4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OxO-bx-kni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1273" y="885"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="Rsb-Hk-A0f">
+            <objects>
+                <splitViewController id="xe0-GY-70h" sceneMemberID="viewController" isDesignatedEntryPoint="YES">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <segue destination="ABi-Im-JKK" kind="relationship" relationship="masterViewController" id="6xU-7d-SP6"/>
+                        <segue destination="fk4-Jp-7ju" kind="relationship" relationship="detailViewController" id="HTR-1b-mU7"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dgZ-dB-wNT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="480" y="196"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="108"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="Default-568h.png" width="640" height="1136"/>
+        <image name="Icon-60.png" width="120" height="120"/>
+        <image name="Icon.png" width="57" height="57"/>
+        <image name="Icon-Small.png" width="29" height="29"/>
+        <image name="Default.png" width="320" height="480"/>
+    </resources>
+</document>
