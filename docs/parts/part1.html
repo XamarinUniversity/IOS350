@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Xamarin University</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+</head>
+
+<body>
+	<header>What's New in iOS8</header>
+
+	<section id="main">
+
+		<h1>Exercise 1: Working with some of the new UIKit changes in iOS8</h1>
+
+		<h2>Duration</h2>
+		<p>20 minutes</p>
+
+		<!-- - - - - - - - - Goals - - - - - - - - -->
+
+		<h2 id="goals">Lab goals</h2>
+
+		<p>
+			Our goal with this exercise is to explore some of the great new features in UIKit which have been added to iOS8. You will need the iOS8 SDK (included with XCode 6) as well as the latest Xamarin toolset which includes the iOS8 bindings.
+		</p>
+
+      <div class="hintblock">
+         <strong>Tip:</strong> If you are doing this exercise live in a session, make sure to make good use of the instructor, they are online to answer any questions you have!
+      </div>
+
+		<p>
+			You will start with an existing checkbook application that displays a set of editable checks using a <code>UITableView</code>.
+		</p>
+
+      <table>
+         <tr>
+            <td><img src="./res/images/screen1.png" /></td>
+            <td><img src="./res/images/screen2.png" /></td>
+         </tr>
+      </table> 
+
+      <p>
+      Over the course of the exercise you will modify this application in several ways.
+      </p>
+      <ul>
+         <li>Utilize dynamic Table View sizing so the application handles accessibility properly.</li>
+         <li>Hide the Navigation Bar on swipe.</li>
+         <li>Add in a <code>UISearchController</code> to support searching.</li>
+         <li>(Optional) Add multiple actions through a Table View cell swipe.</li>
+      </ul>
+      <p>
+      Almost all of this work will be performed in the <code>CheckbookViewController</code> which is the main view controller used in the application. Since all of this is new, we will use a step-by-step approach in this exercise to accomplish each change.
+      </p>
+
+
+		<!-- - - - - - - - - Supplied resources - - - - - - - - -->
+
+		<h2>Required assets</h2>
+		<p>
+			The provided <strong>Exercise 1</strong> folder contains a starter project in the <strong>Lab.Start</strong> folder. It also has a completed version of this exercise for you to examine at the end if you want to see all the steps in finished form.
+		</p>
+
+		<!-- - - - - - - - - Steps - - - - - - - - -->
+		<h1>Steps</h1>
+
+		<h2>Open the starting exercise</h2>
+      <p>Open the <strong>Checkbook.sln</strong> solution in the <strong>Exercise 1 / Lab.Start / Checkbook</strong> folder and examine the project. The primary files are explained below.</p>
+
+      <img src="./res/images/open-project.png" />
+
+      <table class="grid alternate-rows indent-large" width="80%">
+         <tr>
+            <th>Filename</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+            <td><code>Models/Check.cs</code></td>
+            <td>
+               Simple data class to represent a single check. You will not make any changes to this class.
+            </td>
+         </tr>
+         <tr>
+            <td><code>Models/Checkboook.cs</code></td>
+            <td>
+               Container class to manage a list of checks. You will not need to make any changes to this class.
+            </td>
+         </tr>
+         <tr>
+            <td><code>CheckbookViewController.cs</code></td>
+            <td>
+            This is the main view controller which displays the list of checks. It derives from <code>UITableViewController</code> and displays an editable table view, one row per check.</td>
+         </tr>
+         <tr>
+            <td><code>CheckDetailsViewController.cs</code></td>
+            <td>
+               This is the details view controller that displays a single check and allows you to alter the data associated with it. You will not make any changes to this class, but it's worth looking at because it uses the <code>DialogViewController</code> to quickly create a Table View with editable cells.
+            </td>
+         </tr>
+         <tr>
+            <td><code>CheckViewCell.cs</code></td>
+            <td>
+            This is a custom <code>UITableViewCell</code> which is defined in the main storyboard and expressed here in code. You will replace the existing cell display in the <code>CheckbookViewController</code> with this custom cell as part of the first goal.
+            </td>
+         </tr>
+         <tr>
+            <td><code>SearchResultsViewController.cs</code></td>
+            <td>
+            This is a view controller which displays a set of search results. You will utilize this existing bit of code when you add in the <code>UISearchController</code> support.
+            </td>
+         </tr>
+      </table>
+
+		<h2>Utilize dynamic Table View sizing</h2>
+      <p>
+      Our first goal is to turn on dynamic Table View sizing. We are currently using a standard <code>UITableViewCell</code> to render the rows in the table view, and it turns out that iOS8 automatically manages the sizes for us when you use the standard cells. To show this, let's change the text size.</p>
+		<ol>
+			<li>Build and run the application on an <strong>iPhone</strong> device or simulator.</li>
+         <li>Tap the <em>Home</em> button (or <strong>Shift+Command+H</strong> on the simulator) to get to the main screen and open the Settings application.</li>
+         <li>Navigate to <strong>General > Accessibility > Larger Text</strong> to change the font size.</li>
+            <img src="./res/images/accessibility.png" />
+			<li>Drag the slider to the right to make the font larger. You can make it even larger by toggling the <strong>Larger Accessibility Sizes</strong> switch.</li>
+         <li>Switch back to the checkbook application and notice the text cells are all larger in response.</li>
+         <img src="./res/images/large-text.png" />
+      </ol>
+      <p>
+      Next, let's replace the default cell with a custom cell and see how it responds to the dynamic type requests.
+      </p>
+      <ol>
+         <li>Open the <code>CheckbookViewController</code> and locate the <code>GetCell</code> method, it should be around line 50 or so.</li>
+         <li>Comment out all the code which creates and fills in the cell details.</li>
+         <li>Next, uncomment the block of code under the line <code>TODO: Step 1: use a custom cell.</code>. Since we aren't concerned with the details of the custom cell itself, we'll just use this implementation. When you are finished, it should look something like:</li>
+<pre class="codeblock prettyprint">
+public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+{
+   var check = Checks[indexPath.Row];
+// UITableViewCell cell = tableView.DequeueReusableCell("BasicCheckCell");
+// if (cell == null) {
+//    cell = new UITableViewCell(UITableViewCellStyle.Subtitle, "BasicCheckCell");
+//    cell.DetailTextLabel.TextColor = UIColor.LightGray;
+// }
+//
+// cell.TextLabel.Text = check.Payee;
+// cell.DetailTextLabel.Text = check.Amount.ToString("C");
+
+   // TODO: Step 1: use a custom cell.
+   CheckViewCell cell = (CheckViewCell) tableView.DequeueReusableCell(
+      new NSString("CheckCell"), indexPath);
+   cell.DateLabel.Text = check.Date.ToString("D");
+   cell.PayeeText.Text = check.Payee;
+   cell.Amount.Text = check.Amount.ToString("C");
+   cell.Amount.TextColor = check.Amount > 0 ? UIColor.Green : UIColor.Red;
+   cell.BackgroundColor = check.Cleared ? UIColor.FromRGB(0xf0, 0xf0, 0xf0) 
+                                        : UIColor.White;
+
+   return cell;
+}
+</pre>
+         <li>Run the application again and notice that this version <em>also</em> has larger sized text. This is because of a new feature in iOS8 which is turned on automatically when you create an iOS8-based Storyboard. It involves setting two properties:
+            <ul class="indent-none"> 
+               <li><code>TableView.RowHeight</code> must be set to <code>UITableView.AutomaticDimension</code></li>
+               <li><code>TableView.EstimatedRowHeight</code> is a new property which must be set to an expected (normal) size for the row, for example: <code>80</code>.</li>
+            </ul>
+         We are not setting either of these properties, although we could - we would want to do this in the <code>ViewDidLoad</code> override. Instead, they are both set in the Storyboard prototype cell.</li>
+         <li>Next, with the app running and change the font size again and switch back to the app. Does the font size change?</li>
+         <li>By default, the Table View sets the font size up once, and once it's set we don't see any changes unless we refresh the data <em>and</em> set the font sizes in our <code>GetCell</code> implementation. To see the notifications, we have to subscribe to a <code>NSNotificationCenter</code> notification called <code>UIApplication.ContentSizeCategoryChangedNotification</code>.</li>
+         <li>In the <code>GetCell</code> implementation, add the following lines to set the font sizes each time we render a cell - this will ensure we are using the <em>current</em> font size as it changes. Make sure to do this before you return the cell!</li>
+<pre class="codeblock prettyprint">
+cell.DateLabel.Font = UIFont.PreferredSubheadline;
+cell.PayeeText.Font = cell.Amount.Font = UIFont.PreferredHeadline;
+</pre>
+
+         <li>Scroll up in the source file to the <code>ViewDidLoad</code> method and add the following code to subscribe to the <code>UIApplication.ContentSizeCategoryChangedNotification</code> notification and reload the table view in response:</li>
+<pre class="codeblock prettyprint">
+NSNotificationCenter.DefaultCenter.AddObserver(
+   UIApplication.ContentSizeCategoryChangedNotification,
+   n => TableView.ReloadData());
+</pre>
+         <li>Run the app again and try changing the font size as the app runs. Notice that it now properly resizes dynamically - and you only had to do a few steps to make it work. This is <em>much</em> improved over iOS7!</li>
+      </ol>
+
+      <h2>Hide the Navigation Bar on swipe</h2>
+      <p>Next, let's turn on a new feature in UIKit which maximizes our screen space when we have a navigation bar.</p>
+      <ol>
+         <li>In the <code>ViewDidLoad</code> method, set the <code>NavigationController.HidesBarsOnSwipe</code> property to <code>true</code>.</li>
+         <li>Run the application and "swipe" up on the Navigation bar header. It should slide up, maximizing your table view's space.</li>
+         <li>Pulling down on the table view will reveal the navigation bar, or you can navigate to and from the page to accomplish the same thing.</li>
+         <li>There is also a <code>HidesBarOnTap</code> property you can try out as well, although this isn't quite as easy to activate on a table view that supports selection.</li>
+      </ol>
+
+      <h2>Add in a <code>UISearchController</code> to support searching</h2>
+      <p>One of the cool new features in iOS8 is a new <code>UISearchBar</code> controller which can be added to any view. It supports the ability to display search results live - so you no longer have to manage that support yourself. This feature replaces the existing <code>UISearchDisplayController</code>, although keep in mind that it's iOS8 only so if you want to continue to support older versions, you might want to stay with the existing display controller.</p>
+      <ol>
+         <li>Locate the <code>ViewDidLoad</code> override in the <code>CheckbookViewController</code>.</li>
+         <li>Let's first create a View Controller to display our search results. We've already got one in the project (<code>SearchResultsViewController</code>) - it uses a Table View and includes a <code>Search</code> method which will filter the results appropriately. Instantiate one and assign it to a variable in the method. It takes the <code>CheckbookViewController</code> instance (really just a parent) and the list of checks.</li>
+<pre class="prettyprint codeblock">
+var searchResultsController = new SearchResultsViewController(this, Checks);
+</pre>
+         <li>Next, we need to create a custom implementation of <code>UISearchResultsUpdating</code> which is the delegate interface used by iOS8 to request a search result update. You should implement the method <code>UpdateSearchResultsForSearchController</code> and use the passed information to refresh the current list of results.
+            <ul class="indent-none">
+               <li>Add a new class to your project named <code>SearchResultsUpdater</code>.</li>
+               <li>Add a public <code>event</code> to the class named <code>UpdateSearchResults</code> which takes a <code>string</code> as the parameter. The completed lab uses an <code>Action&lt;string&gt;</code> delegate type.</li>
+               <li>Override the <code>UpdateSearchResultsForSearchController</code> method and raise the event in response, passing the <code>searchController.SearchBar.Text</code> property to the delegate method.</li>
+               <li>Save and close the file.</li>
+            </ul>
+         </li>
+<p class="indent-none">
+<a href="#" onclick="toggleCode(this, 'searchResults'); return false;" class="uiitem">Show Hint</a>
+<div class="indent-none" id="searchResults" style="display:none;">
+<pre class="prettyprint">
+public class SearchResultsUpdator : UISearchResultsUpdating
+{
+   public event Action&lt;string> UpdateSearchResults = delegate {};
+
+   public override void UpdateSearchResultsForSearchController(UISearchController searchController)
+   {
+      this.UpdateSearchResults (searchController.SearchBar.Text);
+   }
+}
+</pre>
+</div>
+</p>			
+			<li>Next, create an instance of your new <code>SearchResultsUpdater</code>, and wire up the event to the <code>SearchResultViewController.Search</code> method - this takes a string.</li>
+<p class="indent-none">
+<a href="#" onclick="toggleCode(this, 'searchResults2'); return false;" class="uiitem">Show Hint</a>
+<div class="indent-none" id="searchResults2" style="display:none;">
+<pre class="prettyprint">
+var searchResultsController = new SearchResultsViewController(this, Checks);
+
+// Create search updater and wire it up
+<span class="highlight">var searchUpdater = new SearchResultsUpdator();
+searchUpdater.UpdateSearchResults += searchResultsController.Search;</span>
+</pre>
+</div>
+</p>  		
+         <li>Finally we are ready to create our search controller. The constructor takes the view controller which will display the search results.</li>
+         <li>Instantiate a new <code>UISearchController</code>, passing it your <code>searchResultsController</code>.</li>
+         <li>Set the <code>SearchResultsUpdater</code> property on the search controller to your <code>searchUpdater</code>.</li>
+<p class="indent-none">
+<a href="#" onclick="toggleCode(this, 'searchResults3'); return false;" class="uiitem">Show Hint</a>
+<div class="indent-none" id="searchResults3" style="display:none;">
+<pre class="prettyprint">
+searchUpdater.UpdateSearchResults += searchResultsController.Search;
+
+<span class="highlight">SearchController = new UISearchController(searchResultsController);
+SearchController.SearchResultsUpdater = searchUpdater;</span>
+</pre>
+</div>
+</p>        
+
+         <li>The last step is to add the search bar to the UI. We need to set the frame and assign it to the <code>TableHeaderView</code> for our Table View. We also want to set the <code>DefinesPresentationContext</code> property to <code>true</code> to indicate that child view controllers can overlay the current view controllers UI. Here's the code you need to add to the end of your <code>ViewDidLoad</code> method:</li>
+<pre class="prettyprint codeblock">
+SearchController.SearchBar.Frame = new CGRect(SearchController.SearchBar.Frame.X, SearchController.SearchBar.Frame.Y, SearchController.SearchBar.Frame.Width, 44f);
+TableView.TableHeaderView = SearchController.SearchBar;
+DefinesPresentationContext = true;
+</pre>
+         <li>Run the application and try out the new search bar, notice how the search results are overlayed on top of the existing UI.</li>
+         <img src="./res/images/searchbar.png" />
+
+         <li>Try selecting a choice - it currently won't do anything. Let's fix that by implementing the <code>RowSelected</code> method in the <code>SearchResultsViewController</code> class.
+            <ul class="indent-none">
+               <li>Get the selected <code>Check</code> from the <code>visibleChecks</code> collection using the passed <code>indexPath</code>.</li>
+               <li>Call the new <code>ShowDetailViewController</code> method on the <code>parentViewController</code>, passing a new instance of the <code>CheckDetailsViewController</code> (make sure to set the <code>Check</code> property to display the selected check!) and the parent view controller. The code should look something like this:</li>
+            </ul>
+         </li>
+<pre class="prettyprint codeblock">
+public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+{
+   var check = visibleChecks[indexPath.Row];
+   parentViewController.ShowDetailViewController(
+      new CheckDetailsViewController() { Check = check }, 
+      parentViewController);
+}
+</pre>
+         <li>Run the application again and try selecting a choice from the search results. It should now navigate properly to the details page - replacing your current view. Notice that you <em>did not need access to the navigation controller!</em></li>
+      </ol>
+
+      <h2>Add multiple actions through a Table View cell swipe</h2>
+      <p>
+      In this final step, we will add some new actions to the table view and show off the new iOS8 API to customize table view cell swipe actions.</p>
+      <ol>
+         <li>Open the <code>CheckbookViewController</code> class and override the <code>EditActionsForRow</code> method. This method is called when you swipe on a table view cell and it can return an array of <code>UITableViewRowAction</code>s to display, where each action has a:
+            <ul class="indent-none">
+               <li>Title</li>
+               <li>Background Color</li>
+               <li>Action function</li>
+            </ul></li>
+         <li>
+            Create three <code>UITableViewRowAction</code> variables to manage "Delete", "Clear" and "More" in the method using the <code>UITableViewRowAction.Create</code> method. This takes a style, name and delegate action to perform if the item is selected. Use the following as a guide and just use an empty delegate for now.
+               <ol lclass="indent-none">
+                  <li>Delete should be a destructive style (it will be Red).</li>
+                  <li>Clear should be a Default style and have the <code>BackgroundColor</code> property deliberately set to "Blue".</li>
+                  <li>More should be a Normal style (it will be gray).</li>
+               </ol>
+            </li>
+            <li>Put all three variables into an array and return it from the method. The order determines the position of the button when you swipe - the first item in the array will be the right-most button.</li>
+            <li>Next, override the <code>CommitEditingStyle</code> method - you don't need to provide any implementation, just pass it off to the base class, but the edit actions won't be active unless this method is overridden.</li>
+            <li>Run the app and swipe to the left on a cell. You should see your actions:</li>
+            <img src="./res/images/actions.png" />
+            <li>As a final challenge, see if you can implement the actions:
+               <ul class="indent-none">
+                  <li>Delete should remove the check from the array and delete it from the Table View.</li>
+                  <li>Clear should set the <code>Cleared</code> property on the selected check.</li>
+                  <li>More should display an action sheet using the new <code>UIAlertController</code> class. Add in some choices just to see how it works.</li>
+                  <li>The completed sample has an implementation of this if you'd like to examine it.</li>
+               </ul>
+            </li>
+         </ol>
+
+		<!-- - - - - - - - - Summary - - - - - - - - -->
+
+		<h1>Summary</h1>
+      <p>
+		In this lab, you explored and utilized some of the new iOS8 features available in UIKit on an existing application.
+      <p>
+      <p>
+      There is a completed solution in the <b>Exercise 1</b> folder included with these lab instructions.</p>
+
+		<br />
+		<br />
+
+		<div class="align-right">
+			<a href="../Start%20Here.html">Go Back</a>
+		</div>
+	</section>
+
+	<footer>Copyright (C) 2018 Xamarin Inc., Microsoft.</footer>
+
+</body>
+
+</html>
